@@ -1,3 +1,10 @@
+import { Container } from "@mui/material";
+import Typography from "@mui/material/Typography";
+
 export default async function Page() {
-  return <div />;
+  return (
+    <Container sx={{ flexGrow: 1 }}>
+      <Typography paragraph>Overview page</Typography>
+    </Container>
+  );
 }
