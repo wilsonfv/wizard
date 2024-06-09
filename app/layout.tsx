@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "@/app/ui/header";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
-import { auth } from "@/auth";
+import AppBar from "@/app/ui/app-bar-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,12 +16,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
+        <AppBar />
         <Box
           sx={{
             display: "flex",

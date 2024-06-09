@@ -1,15 +1,12 @@
-"use client";
-
-import { getSession } from "next-auth/react";
 import Stack from "@mui/material/Stack";
-import { SignInButton } from "@/app/ui/signin-button";
+import SignInButton from "@/app/ui/signin-button";
+import { auth } from "@/auth";
+import AccountMenu from "@/app/ui/account-menu";
 
-export function AuthSection() {
-  const session = async () => {
-    return await getSession();
-  };
+export default async function AuthSection() {
+  const session = await auth();
 
-  console.log("auth-section.tsx : " + session);
+  console.log("auth-section : user " + session?.user);
 
   return (
     <Stack
@@ -20,7 +17,11 @@ export function AuthSection() {
         padding: 0,
       }}
     >
-      <SignInButton provider="Google" />
+      {session?.user ? (
+        <AccountMenu user={session?.user} />
+      ) : (
+        <SignInButton provider="Google" />
+      )}
       <SignInButton provider="Github" />
     </Stack>
   );
