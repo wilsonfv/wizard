@@ -1,39 +1,33 @@
 import { Alert, Paper, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { auth } from "@/auth";
+import Divider from "@mui/material/Divider";
+import SignInButton from "@/app/ui/signin-button";
 
 export default async function Page() {
   const session = await auth();
 
   return (
-    <Stack sx={{ width: "100%" }} spacing={2}>
-      <Paper
-        sx={{
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          // height: 240,
-        }}
-      >
-        <Typography variant="subtitle2" gutterBottom>
-          Wizard can help you enable GCP products.
-        </Typography>
-        {!session?.user && (
-          <Alert severity="info">
-            You MUST signin with Google account to continue.
-          </Alert>
-        )}
-      </Paper>
-      <Paper
-        sx={{
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          height: 240,
-        }}
-      >
-        Select GCP Product ID
-      </Paper>
+    <Stack spacing={2}>
+      <Typography variant="subtitle2" gutterBottom>
+        Wizard can help you enable GCP products.
+      </Typography>
+      {!session?.user && (
+        <Alert severity="info">
+          <Stack direction="row" spacing={2}>
+            <Typography>
+              You MUST signin with Google account to continue.
+            </Typography>
+            <SignInButton provider="Google" />
+          </Stack>
+        </Alert>
+      )}
+
+      <Divider />
+
+      <Typography variant="subtitle2" gutterBottom>
+        Select GCP Project ID
+      </Typography>
     </Stack>
   );
 }
