@@ -26,7 +26,7 @@ export default async function Page() {
       <Divider />
 
       <Typography variant="subtitle2" gutterBottom>
-        Select GCP Project ID
+        {JSON.stringify(session)}
       </Typography>
     </Stack>
   );
